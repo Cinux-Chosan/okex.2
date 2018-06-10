@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <input type="text" placeholder="输入apiKey" id="apikey">
+        <input type="text" placeholder="输入secretKey" id="secretkey">
+        <button type="button" onclick="begin()">开始</button>
+    </form>
+    <script src="js/libs/md5.js"></script>
+    <script src="js/libs/lib.js"></script>
+    <script src="js/okex.socket.js"></script>
+    <script>
+        function begin() {
+            let apiKey = document.getElementById('apikey').value;
+            let secretKey = document.getElementById('secretkey').value;
+            let socket = new Okex({ apiKey, secretKey });
+            socket.ping();
+            socket.login()
+            // socket.subSpotDepth('okb', 'usdt')
+            // socket.subSpotDeals('okb', 'usdt')
+            socket.subKLine('okb', 'usdt', '1min', data => {
+                debugger
+            });
+
+            socket.reqWalletInfo(data => {
+                // debugger
+            });
+
+            socket.reqOrderHistory('okb', 'usdt', 1, data => {
+                // debugger
+            })
+
+            socket.reqUserInfo(data => {
+                // debugger
+            })
+
+            Util.check(() => socket.isLoggedIn).then(data => {
+                // 需要登录之后才能订阅的写在这里
+                socket.subSpotBalance('okb', 'usdt', {}, data => {
+                    // 回调函数
+                })
+            })
+
+        }
+    </script>
+</body>
+
+</html>

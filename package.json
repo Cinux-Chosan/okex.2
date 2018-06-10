@@ -1,0 +1,20 @@
+{
+  "name": "okex.socket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^2.2.1",
+    "koa": "^2.5.1",
+    "koa-bodyparser": "^2.5.0",
+    "koa-router": "^7.4.0",
+    "request": "^2.87.0",
+    "request-promise-native": "^1.0.5",
+    "socket.io": "^2.1.1"
+  }
+}
