@@ -27,7 +27,16 @@
             // socket.subSpotDepth('okb', 'usdt')
             // socket.subSpotDeals('okb', 'usdt')
             socket.subKLine('okb', 'usdt', '1min', data => {
-                debugger
+                kData = data[0].data[0]
+                console.log(kData);
+                let k = kData[4] - kData[1]
+                if (k > 0) {
+                    console.log(`收盘价大于开盘价，价格上升${k}`)
+                } else if (kData[4] - kData[1] < 0) {
+                    console.log('收盘价小于开盘价，价格下跌' + k)
+                } else if (k === 0) {
+                    console.log('开收盘持平！')
+                }
             });
 
             socket.reqWalletInfo(data => {
